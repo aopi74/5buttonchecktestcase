@@ -1,0 +1,39 @@
+package labtask5;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Labtask5 {
+
+    public static void main(String[] args) {
+       System.setProperty("webdriver.chrome.driver", "/home/opi/Testing/chromedriver-linux64/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        // Open the YouTube website
+        driver.get("https://www.youtube.com");
+
+        // Find the search input element and search for "Green University of Bangladesh"
+        WebElement searchInput = driver.findElement(By.name("search_query"));
+        searchInput.sendKeys("Green University of Bangladesh");
+        searchInput.submit();
+
+        // Wait for a few seconds to let the search results load
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            //e.printStackTrace();
+        }
+
+        // Check whether there are 5 buttons on the page
+        int buttonCount = driver.findElements(By.tagName("button")).size();
+        if (buttonCount == 5) {
+            System.out.println("There are 5 buttons on the page.");
+        } else {
+            System.out.println("There are not 5 buttons on the page.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
